@@ -274,7 +274,7 @@ attach.get = {
 
 attach.until = {
 	pop: function(list_pop, edit_pop){
-			var url = "http://"+attach.get.server()+"/attach.php";
+			var url = "http://"+attach.get.server()+"/attach.php?callback=?";
 			var postdata = {"f":"list",
 					"user_id":attach.get.user_id(),
 					"page_id":attach.get.page_uniq_id()};
@@ -312,7 +312,7 @@ attach.until = {
 	},
 	list: function(content_con, list_info){
 		if(list_info !== undefined && list_info.length>0){
-			var html = '<ul class="simple_list">';
+			var html = '<div class="space_line"></div><ul class="simple_list">';
 			$.each(list_info,function(index, data){
 				//"id":"2","user_id":"1","page_id":"abc_page_1","resource_tip":"aaa.com","resource_link":"aaa.com","link_type":"1","create_time":"2013-09-11 19:09:21"
 				var resource_link = data.resource_link;
@@ -321,14 +321,19 @@ attach.until = {
 				html += '<li><a href="'+resource_link+'" target="_blank">'+data.resource_tip+'</a></li>';
 			});
 				html +='</ul>';
-				html +='<a class="simple_edit_btn" href="javascript:void(0)"></a>';
+				html +='<div class="space_line"></div><a class="simple_edit_btn" href="javascript:void(0)"></a>';
 			content_con.html(html);
 		
 			$(".simple_edit_btn").click(function(){//点编辑按钮，出大弹层
 				pop.until.close_pop();
 				attach.until.edit_pop(list_info);
 			});
+			content_con.find(".simple_list").css({
+				"max-height":pop.setting.max_height-122,
+			});
 		}
+		
+		
 	},
 	edit_pop: function(list_info){
 		//设置弹层的属性，并且初始化
@@ -353,6 +358,9 @@ attach.until = {
 			'</div>');
 		var $list_container = $('<div class="list_container"></div>');
 		content_con.append($edit_obj,$list_container);
+		$list_container.css({
+			"max-height":pop.setting.max_height-120,
+		});
 		
 		attach.until.display_list($list_container, list_info);
 		attach.until.add_web($edit_obj,$list_container);
@@ -420,7 +428,7 @@ attach.until = {
 		});
 	},
 	insert:function(resource_tip_val, resource_link_val, fn){
-		var url = "http://"+attach.get.server()+"/attach.php";
+		var url = "http://"+attach.get.server()+"/attach.php?callback=?";
 		var postdata = {"f":"insert",
 				"user_id":attach.get.user_id(),
 				"page_id":attach.get.page_uniq_id(),
@@ -507,7 +515,7 @@ attach.until = {
 		
 	},
 	update:function(id, resource_tip_val, resource_link_val, fn){
-		var url = "http://"+attach.get.server()+"/attach.php";
+		var url = "http://"+attach.get.server()+"/attach.php?callback=?";
 		var postdata = {"f":"update",
 				"user_id":attach.get.user_id(),
 				"page_id":attach.get.page_uniq_id(),
@@ -536,7 +544,7 @@ attach.until = {
 		});
 	},
 	del:function(id, fn){
-		var url = "http://"+attach.get.server()+"/attach.php";
+		var url = "http://"+attach.get.server()+"/attach.php?callback=?";
 		var postdata = {"f":"delete",
 				"user_id":attach.get.user_id(),
 				"page_id":attach.get.page_uniq_id(),
@@ -578,13 +586,13 @@ attach.until = {
 		$(_div).find(".yes_btn").click(function(){
 			$(_div).fadeOut('fast');
 			$pop_mask.fadeOut('fast');
-			yescallback();
+			if(yescallback) yescallback();
 			return true;
 		});
 		$(_div).find(".no_btn").click(function(){
 			$(_div).fadeOut('fast');
 			$pop_mask.fadeOut('fast');
-			nocallback();
+			if(nocallback) nocallback();
 			return false;
 		});
 	}
