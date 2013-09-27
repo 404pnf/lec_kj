@@ -11,6 +11,7 @@ $func = $_REQUEST['f'];
 
 $user_id = $_REQUEST["user_id"];
 $page_id = $_REQUEST["page_id"];
+$callback = $_REQUEST["callback"];
 
 switch ($func){
 	case "list":
@@ -38,6 +39,9 @@ if($return_type == 'php'){
 	var_dump($arr);
 	echo "</pre>";
 }
-else
-	echo json_encode($arr);
+else{
+	
+	$json = json_encode($arr);
+	echo $callback."(".$json.")";
+}
 ?>
