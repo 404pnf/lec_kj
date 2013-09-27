@@ -274,7 +274,7 @@ attach.get = {
 
 attach.until = {
 	pop: function(list_pop, edit_pop){
-			var url = "http://"+attach.get.server()+"/kejian/attach.php";
+			var url = "http://"+attach.get.server()+"/attach.php";
 			var postdata = {"f":"list",
 					"user_id":attach.get.user_id(),
 					"page_id":attach.get.page_uniq_id()};
@@ -420,7 +420,7 @@ attach.until = {
 		});
 	},
 	insert:function(resource_tip_val, resource_link_val, fn){
-		var url = "http://"+attach.get.server()+"/kejian/attach.php";
+		var url = "http://"+attach.get.server()+"/attach.php";
 		var postdata = {"f":"insert",
 				"user_id":attach.get.user_id(),
 				"page_id":attach.get.page_uniq_id(),
@@ -507,7 +507,7 @@ attach.until = {
 		
 	},
 	update:function(id, resource_tip_val, resource_link_val, fn){
-		var url = "http://"+attach.get.server()+"/kejian/attach.php";
+		var url = "http://"+attach.get.server()+"/attach.php";
 		var postdata = {"f":"update",
 				"user_id":attach.get.user_id(),
 				"page_id":attach.get.page_uniq_id(),
@@ -536,7 +536,7 @@ attach.until = {
 		});
 	},
 	del:function(id, fn){
-		var url = "http://"+attach.get.server()+"/kejian/attach.php";
+		var url = "http://"+attach.get.server()+"/attach.php";
 		var postdata = {"f":"delete",
 				"user_id":attach.get.user_id(),
 				"page_id":attach.get.page_uniq_id(),
