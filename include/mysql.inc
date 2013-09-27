@@ -5,7 +5,7 @@ private static $DBInstance;
 
  public static function db_conn(){
 	if(!self::$DBInstance){
-		$dsn =  "mysql://onionuser:654321@192.168.54.123/test";
+		$dsn =  "mysql://py:pengyou@124.193.83.246/lec_kj";
 		self::$DBInstance = & DB::connect($dsn);
 		if(!DB::isError(self::$DBInstance)){
 			self::$DBInstance->setFetchMode(DB_FETCHMODE_ASSOC);
