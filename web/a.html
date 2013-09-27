@@ -1,0 +1,32 @@
+<html>  
+<head>  
+   <title> New Document </title>  
+</head>  
+<body>  
+<input type="file" id="file">  
+<input type="button" value="click" onClick="ok()">  
+<a dataa="file:///G:/zendproject/" target="_blank">a</a>
+</body>  
+<script type="text/javascript" src="jquery.min.js" ></script>
+<script>
+<!--  
+function ok(){  
+	var s = document.getElementById("file");  
+	s.click();  
+	//var str = s.value;//获取文件路径  
+	//console.log(str);//在这里你可以进行自己的工作  
+}  
+$(function(){
+	$("#file").change(function(){
+		alert($("#file").val());
+		
+	});
+	$("a").click(function(){
+		var h = $(this).attr("dataa");
+		alert(h);
+		window.open(h);
+	});
+});
+// -->
+</script>  
+</html>  
