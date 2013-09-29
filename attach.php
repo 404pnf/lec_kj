@@ -2,7 +2,7 @@
 include_once 'config.php';
 include_once 'include/attachment.inc';
 	
-header("Content-type: text/html; charset=utf-8");
+header("Content-type: text/html; charset=iso-8859-1");
 
 $at = new Attachment();
 
