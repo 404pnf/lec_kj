@@ -1,10 +1,8 @@
 //点击附件按钮，启动弹层
 $(function(){
 	$(".pop_btn").click(function(){
-		if($(this).hasClass("clicked")){
-			pop.until.close_pop();
-		}
-		else{
+		if(!$(this).hasClass("clicked")){
+			$(this).addClass("clicked");
 			attach.init($(this).parent(".attach_pop"));
 		}
 	});
@@ -31,6 +29,7 @@ pop.base={
 pop.init = function(pop_property_obj){
 	pop.base.pop_property_obj = $(pop_property_obj);	//设置全局的获取属性div对象，必须
 	pop.base.pop_obj = pop.until.creat_pop();	//生成全局的弹窗对象，必须
+	pop.get.pop_btn_obj().addClass("clicked");
 	
 	//根据设置，控制弹窗的显示
 	if(pop.setting.pop_center){
@@ -71,7 +70,6 @@ pop.get = {
 
 pop.until = {
 	creat_pop:function(){
-		//TODO 加id
 		var	$pop_obj = 
 			$('<div id="" class="pop_window">'+
 				'<div class="left_line"></div>'+
@@ -213,7 +211,6 @@ attach.property_obj = {};
 //附件初始化
 attach.init = function(attach_property_obj){
 	attach.property_obj = $(attach_property_obj);	//设置全局的获取属性div对象，必须
-	attach.property_obj.find(".pop_btn").addClass("clicked");
 	
 	attach.until.pop(attach.until.list_pop, attach.until.edit_pop);
  
@@ -312,16 +309,22 @@ attach.until = {
 	},
 	list: function(content_con, list_info){
 		if(list_info !== undefined && list_info.length>0){
-			var html = '<div class="space_line"></div><ul class="simple_list">';
+			var html = '<div class="space_line line_top"></div><ul class="simple_list">';
+			
 			$.each(list_info,function(index, data){
 				//"id":"2","user_id":"1","page_id":"abc_page_1","resource_tip":"aaa.com","resource_link":"aaa.com","link_type":"1","create_time":"2013-09-11 19:09:21"
 				var resource_link = data.resource_link;
 				if(resource_link.search(/\:/)==-1)
 					resource_link = "http://"+resource_link;
-				html += '<li><a href="'+resource_link+'" target="_blank">'+data.resource_tip+'</a></li>';
+				var last_class = "";
+				if(index == (list_info.length-1)){
+					last_class = "last";
+				}
+				html += '<li class="'+last_class+'"><a href="'+resource_link+'" target="_blank">'+data.resource_tip+'</a></li>';
+			
 			});
 				html +='</ul>';
-				html +='<div class="space_line"></div><a class="simple_edit_btn" href="javascript:void(0)"></a>';
+				html +='<div class="space_line line_bottom"></div><a class="simple_edit_btn" href="javascript:void(0)"></a>';
 			content_con.html(html);
 		
 			$(".simple_edit_btn").click(function(){//点编辑按钮，出大弹层
@@ -329,7 +332,10 @@ attach.until = {
 				attach.until.edit_pop(list_info);
 			});
 			content_con.find(".simple_list").css({
-				"max-height":pop.setting.max_height-122,
+				"max-height":pop.setting.max_height-150,
+			});
+			content_con.find(".space_line").css({
+				"width":pop.setting.width-28,
 			});
 		}
 		
@@ -375,6 +381,9 @@ attach.until = {
 			$.each(list_info,function(index, data){
 				attach.until.add_list($list_container, data);
 			});
+			$list_container.find("li .dis_resource_link").css({
+				"width":$list_container.find("li").width()-125,
+			});
 		}
 	},
 	add_web:function($edit_obj,$list_container){
@@ -393,12 +402,17 @@ attach.until = {
 			'</div>');
 		
 		$edit_obj.find(".add_web").click(function(){
+			var $add_web_btn = $(this);
+			
+			if($add_web_btn.hasClass("active")) return false;
+			$add_web_btn.addClass("active");
 			
 			$add_web_obj.appendTo($list_container);
-			$list_container.scrollTop($list_container.height());
+			$list_container.scrollTop($list_container.find("ul").height()+111);
 			
 			$(".add_web_input .cancel_btn").click(function(){
 				$(this).parents(".add_web_input").remove();
+				$add_web_btn.removeClass("active");
 			});
 			
 			$(".add_web_input .done_btn").click(function(){
@@ -418,6 +432,7 @@ attach.until = {
 					
 					attach.until.insert(resource_tip_val, resource_link_val, function(data){
 						$input_container.remove();
+						$add_web_btn.removeClass("active");
 						//成功后直接加一行显示
 						attach.until.add_list($list_container, data);
 					});
