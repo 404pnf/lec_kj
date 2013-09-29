@@ -1,24 +1,11 @@
 @charset "utf-8";
 
 /* 基础css */
-::-webkit-scrollbar {
-	margin-right:-3px;
-    width: 5px;
-}
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-}
-::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    background: rgba(116,48,15,0.8); 
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-}
-::-webkit-scrollbar-thumb:window-inactive {
-	background: rgba(116,48,15,0.4); 
-}
+::-webkit-scrollbar {margin-right:-3px;width: 5px;}
+::-webkit-scrollbar-track {-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); -webkit-border-radius: 3px;border-radius: 3px;}
+::-webkit-scrollbar-thumb {-webkit-border-radius: 3px;border-radius: 3px;background: rgba(116,48,15,0.8); -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); }
+::-webkit-scrollbar-thumb:window-inactive {background: rgba(116,48,15,0.4); }
+
 .attach_pop ul,.attach_pop li{list-style: none outside none;margin:0;padding:0;}
 .attach_pop a{border:none;text-decoration:none;}
 .attach_pop input,.attach_pop textarea,.attach_pop select{font-family:inherit;font-size:inherit;font-weight:inherit;*font-size:100%;}
@@ -60,13 +47,13 @@ a.simple_edit_btn:active{background:url("edit_btn_click.png");}
 
 /* 添加、编辑资源弹层css */
 .add_btn_cont{width: 305px;height:50px;overflow: hidden;margin: 0 auto;padding: 28px 0;}
-	.add_btn_cont .add_btn{cursor:pointer; width:141px;height:49px;float:left;}
+	.add_btn_cont .add_btn{cursor:pointer; width:141px;height:49px;/* float:left; */}
 	.add_btn_cont .add_local{background:url("add_local.png");margin-right:23px;}
-	.add_btn_cont .add_web{background:url("add_web.png");}
+	.add_btn_cont .add_web{background:url("add_web.png");text-align: center;margin: 0 auto;}
 		.add_btn_cont .add_web:hover{background:url("add_web_hover.png");}
 		.add_btn_cont .add_web:active, .add_btn_cont .add_web.active{background:url("add_web_click.png");}
 		
-.list_container{overflow-y:auto;margin: 0 15px 0 10px;padding: 0px 5px 10px;}
+.list_container{overflow-y:auto;margin: 0 10px 0 10px;padding: 0px 5px 10px;}
 	.add_local_input, .add_web_input {height:111px;}
 		.input_t{margin:14px 12px 8px;}
 			.tip_c{display:block;width: 200px;float:left;}
