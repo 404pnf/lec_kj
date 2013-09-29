@@ -359,7 +359,6 @@ attach.until = {
 	edit_list: function(content_con, list_info){
 		var	$edit_obj = 
 			$('<div class="add_btn_cont">'+
-				'<div class="add_btn add_local"></div>'+
 				'<div class="add_btn add_web"></div>'+
 			'</div>');
 		var $list_container = $('<div class="list_container"></div>');
