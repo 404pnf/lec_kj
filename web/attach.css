@@ -1,6 +1,24 @@
 @charset "utf-8";
 
 /* 基础css */
+::-webkit-scrollbar {
+	margin-right:-3px;
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    background: rgba(116,48,15,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(116,48,15,0.4); 
+}
 .attach_pop ul,.attach_pop li{list-style: none outside none;margin:0;padding:0;}
 .attach_pop a{border:none;text-decoration:none;}
 .attach_pop input,.attach_pop textarea,.attach_pop select{font-family:inherit;font-size:inherit;font-weight:inherit;*font-size:100%;}
@@ -8,36 +26,48 @@
 .fclear:before, .fclear:after {content:"";display:table;clear:both;}
 
 /*附件弹层 基础CSS Document */
-.pop_window{position:absolute;background-color: #FAECDE;font-family: "黑体",Arial;font-size: 14px;color:#b3846d;}
+.pop_window{position:absolute;background-color: #FAECDE;font-family: "黑体",Arial;font-size: 14px;color:#b3846d;z-index: 999;}
 	.pop_window a {font-family: "黑体",Arial;font-size: 14px;color:#b3846d;}
 		.pop_window a:link, .pop_window a:active, .pop_window a:visited{color:#b3846d;}
 	.left_line{background:url("border_left.png") repeat-y;width: 14px;height: 100%;position:absolute;left: 0px;}
-	.right_line{background:url("border_right.png") repeat-y;width: 14px;height: 100%;position:absolute;right: 0px;}
-#pop_mask, #delete_pop_mask{width: 100%;height:100%;opacity: .6;background: #000000;position: absolute;top: 0;left: 0;filter:alpha(opacity=60);}
+	.right_line{background:url("border_right.png") repeat-y;width: 14px;height: 100%;position:absolute;right: 0px;z-index: 99;}
+#pop_mask, #delete_pop_mask{width: 100%;height:100%;opacity: .6;background: #000000;position: absolute;top: 0;left: 0;filter:alpha(opacity=60);z-index: 100;}
 .title_bar{background:url("top_line.png") repeat-x;width: 100%;height: 12px;position:absolute;}
 	.title_bar .title_value{background:url("title_bg.png");font-size:0;text-indent:9999;display:block; width: 84px;height: 34px;position: absolute;top: -7px;left: 0px;}
-	.title_bar .close_button{background:url("close_nomal.png"); font-size:0;text-indent:9999;display:block; width: 41px; height: 41px; position:absolute; top: -7px; right: -7px;cursor:pointer;}
-.content_container{width:100%;height:100%;}
+	.title_bar .close_button{background:url("close_nomal.png"); font-size:0;text-indent:9999;display:block; width: 41px; height: 41px; position:absolute; top: -7px; right: -7px;cursor:pointer;z-index: 99;}
+		.title_bar .close_button:hover{background:url("close_hover.png");}
+		.title_bar .close_button:active{background:url("close_click.png");}
+.content_container{/* width:100%; *//* height:100%; */z-index: 9;position: relative;padding: 0 15px;/* overflow: hidden; */}
 .bottom_line{width: 100%;height: 21px;position:absolute;bottom: 0px;z-index: 0;bottom: -14px;}
 	.bottom_line .leftcorner{background:url("corner_left.png") no-repeat;width: 14px;height: 21px;position: absolute;top: 0px;left: 0px;}
 	.bottom_line .rightcorner{background:url("corner_right.png") no-repeat;width: 14px;height: 21px;position: absolute;top: 0px;right: 0px;}
 	.bottom_line .line{background:url("bottom_line.png") repeat-x;height: 21px;z-index: 0;margin: 0 10px;}
 	
 /* 列表弹层css */
-ul.simple_list{background-image:url("space_line.png"),url("space_line.png"); background-repeat:repeat-x; background-position:top, bottom;list-style: none outside none;margin-top: 48px;padding-top: 14px;text-align: center;}
+ul.simple_list{list-style: none outside none;text-align: center;overflow-y: auto;overflow-x: hidden;}
 	ul.simple_list li{padding: 0 0px 14px;}
-		ul.simple_list li a{display:block; background:url("big_btn_nomal.png");width:169px;height:49px;text-align:center;line-height:49px;margin: 0 auto;font-size: 18px;}
+		ul.simple_list li a{display:block; background:url("big_btn_nomal.png");width:169px;height:49px;text-align:center;line-height:49px;margin: 0 auto;font-size: 18px;white-space:nowrap; text-overflow:ellipsis;overflow:hidden;}
 		ul.simple_list li a:link, ul.simple_list li a:visited,ul.simple_list li a:hover,ul.simple_list li a:active{color: #74300f;}
-.simple_edit_btn{display:block; background:url("edit_btn.png");width: 40px;height: 40px;margin: 15px auto 31px;padding: 0;}
+		ul.simple_list li a:hover{background:url("big_btn_hover.png");}
+		ul.simple_list li a:active{background:url("big_btn_click.png");}
+		ul.simple_list li.last{padding-bottom:0px;}
+a.simple_edit_btn{display:block; background:url("edit_btn.png");width: 40px;height: 40px;margin: 0 auto;padding: 0;}
+a.simple_edit_btn:hover{background:url("edit_btn_hover.png");}
+a.simple_edit_btn:active{background:url("edit_btn_click.png");}
+.space_line{background:url("space_line.png") repeat-x;height: 10px;}
+.line_top{margin:48px 0 14px;height:2px;}
+.line_bottom{margin:14px 0;height:2px;}
 
 /* 添加、编辑资源弹层css */
 .add_btn_cont{width: 305px;height:50px;overflow: hidden;margin: 0 auto;padding: 28px 0;}
 	.add_btn_cont .add_btn{cursor:pointer; width:141px;height:49px;float:left;}
 	.add_btn_cont .add_local{background:url("add_local.png");margin-right:23px;}
 	.add_btn_cont .add_web{background:url("add_web.png");}
-.list_container{overflow-y:auto;margin: 0 10px;padding: 0px 0 10px;max-height: 220px;}
+		.add_btn_cont .add_web:hover{background:url("add_web_hover.png");}
+		.add_btn_cont .add_web:active, .add_btn_cont .add_web.active{background:url("add_web_click.png");}
+		
+.list_container{overflow-y:auto;margin: 0 15px 0 10px;padding: 0px 5px 10px;}
 	.add_local_input, .add_web_input {height:111px;}
-		.space_line{background:url("space_line.png") repeat-x;height: 10px;}
 		.input_t{margin:14px 12px 8px;}
 			.tip_c{display:block;width: 200px;float:left;}
 				.tip{display:none;padding-left:5px;}
@@ -47,23 +77,30 @@ ul.simple_list{background-image:url("space_line.png"),url("space_line.png"); bac
 				.add_local_input input.resource_tip, .add_web_input input.resource_tip{width: 116px;display: inline;}
 				.add_local_input input.resource_link, .add_web_input input.resource_link{width: 80%;margin: 0 12px;}	
 		.cancel_btn,.done_btn{float:right;background:url("done_bg.png");width:52px;height:36px;margin-left:6px;line-height:36px;text-align:center;color:#fcded1;cursor:pointer;}	
- 			
+ 			.cancel_btn:hover,.done_btn:hover{background:url("done_bg_hover.png");}
+			.cancel_btn:active,.done_btn:active{background:url("done_bg_click.png");}
  	.edit_list{}
 		.edit_list li{background:url("space_line.png") repeat-x top ;height: 40px;padding:15px 12px;}	
  			.edit_list li .li_left{float:left;}	
  				.edit_list li .li_left a{display:block;}
- 				.edit_list li .li_left a.dis_resource_tip{padding-bottom:10px;}	
+ 				.edit_list li .li_left a.dis_resource_tip{padding-bottom:10px;}
+ 				.edit_list li .li_left a.dis_resource_link{white-space:nowrap; text-overflow:ellipsis;overflow:hidden;}		
  			.edit_list li .li_right{float:right;width: 110px;}	
  				.edit_list li .li_right .delete_btn, .edit_list li .li_right .edit_btn{background:url("edit_nomal.png");width:52px;height:36px;line-height:36px;text-align:center;float: right;cursor: pointer;}
 				.edit_list li .li_right .edit_btn{margin-right: 6px;}
+ 					.edit_list li .li_right .delete_btn:hover, .edit_list li .li_right .edit_btn:hover{background:url("edit_hover.png");}
+ 					.edit_list li .li_right .delete_btn:active, .edit_list li .li_right .edit_btn:active{background:url("edit_click.png");}
  			
  	 /*是否删除评论小浮层*/
- 	#confirmPop{position: absolute;background:url("delete_bg.png");width:327px;height:189px;margin:0 auto;text-align:center;top: 82px;left: 80px;}
+ 	#confirmPop{position: absolute;background:url("delete_bg.png");width:327px;height:189px;margin:0 auto;text-align:center;top: 82px;left: 80px;z-index: 101;}
 		#confirmPop p{ text-align: center; padding: 52px 0 39px; margin: 0; font-size: 16px; color: #74300f;}
 		#confirmPop .TC_delate_btn{  width: 135px;   height: 49px;   margin-left: 21px;    background: url("delete_done.png") no-repeat;  cursor: pointer;}
 		#confirmPop .yes_btn{float:left;}
+			#confirmPop .yes_btn:hover{background:url("delete_done_hover.png");}
+			#confirmPop .yes_btn:active{background:url("delete_done_click.png");}
 		#confirmPop .no_btn{ float:right; margin-right: 21px; margin-left: 0; background-image: url("delete_cancel.png");}
-
+			#confirmPop .no_btn:hover{background-image: url("delete_cancel_hover.png");}
+	 		#confirmPop .no_btn:active{background-image: url("delete_cancel_click.png");}
 	 			
  			
  			
